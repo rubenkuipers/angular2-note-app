@@ -9,10 +9,12 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  'marked': 'vendor/marked'
 };
 
 /** User packages configuration. */
 const packages: any = {
+  'marked': { defaultExtension: 'js', main: 'marked.min.js' }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,6 +38,7 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
+  'app/note-app',
   /** @cli-barrel */
 ];
 
@@ -52,7 +55,8 @@ System.config({
   map: {
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
-    'main': 'main.js'
+    'marked': 'vendor/marked',
+    'main': 'main.js',
   },
   packages: cliSystemConfigPackages
 });
