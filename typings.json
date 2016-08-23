@@ -5,7 +5,9 @@
     "selenium-webdriver": "registry:dt/selenium-webdriver#2.44.0+20160317120654"
   },
   "globalDependencies": {
-    "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504",
-    "marked": "registry:dt/marked#0.0.0+20160325085301"
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504"
+  },
+  "dependencies": {
+    "markdown-it": "registry:npm/markdown-it#4.0.0+20160704212804"
   }
 }

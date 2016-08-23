@@ -9,12 +9,12 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
-  'marked': 'vendor/marked'
+  'markdown-it': 'vendor/markdown-it/dist'
 };
 
 /** User packages configuration. */
 const packages: any = {
-  'marked': { defaultExtension: 'js', main: 'marked.min.js' }
+  'markdown-it': { defaultExtension: 'js', main: 'markdown-it.min.js' }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,7 +55,6 @@ System.config({
   map: {
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
-    'marked': 'vendor/marked',
     'main': 'main.js',
   },
   packages: cliSystemConfigPackages

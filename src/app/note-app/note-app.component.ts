@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as marked from 'marked';
 import { FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup } from '@angular/forms';
+import * as MarkdownIt from 'markdown-it';
 import {Note} from '../note';
 import {NoteService} from '../note.service';
 
@@ -16,15 +16,19 @@ export class NoteAppComponent implements OnInit {
 
 	newNote: Note = new Note();
 	noteForm: FormGroup;
-	private md: MarkedStatic;
+	previewTitle:string;
+	previewContent:string;
+	md = new MarkdownIt();
 
 	constructor(private noteService: NoteService, private fb: FormBuilder) {
 		this.createForm();
-		this.md = marked.setOptions({});
 	}
 
 	createForm() {
-		this.noteForm = this.fb.group({'title': '', 'content': ''})
+		this.noteForm = this.fb.group({'title': '', 'content': ''});
+		this.previewTitle = '';
+		this.previewContent = '';
+		this.subscribeChanges();
 	}
 
 	addNote(note) {
@@ -41,8 +45,25 @@ export class NoteAppComponent implements OnInit {
 		return this.noteService.getAllNotes();
 	}
 
+	subscribeChanges() {
+		this.noteForm.controls['title'].valueChanges.subscribe(value => {
+			this.previewTitle = value;
+		});
+		this.noteForm.controls['content'].valueChanges.subscribe(value => {
+			this.previewContent = this.parseMarkdown(value);
+		});
+	}
+
+	parseMarkdown(content) {
+		return this.md.render(content);
+	}
+
 	ngOnInit() {
-		
+		this.subscribeChanges();
+	}
+
+	ngOnChange() {
+
 	}
 
 	onSubmit(value: any): void {

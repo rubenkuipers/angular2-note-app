@@ -6,28 +6,43 @@
     <h1 class="header__title">Notes</h1>
   </header>
   <section class="noteapp__main main">
-  	<div class="main__form">
-  		<form class="form" [formGroup]="noteForm" (ngSubmit)="onSubmit(noteForm.value)">
-	      <div class="form__group">
-	        <input type="text" class="form__control" id="title" required name="title" placeholder="Your note title" [formControl]="noteForm.controls['title']">        
-	      </div>
-	      <div class="form__group">
-	        <textarea class="form__control" id="content" required name="content" placeholder="Your note content: feel free to use markdown if you like!" [formControl]="noteForm.controls['content']"></textarea>
-	      </div>
-	      <button type="submit" class="form__submit" [disabled]="!noteForm.valid">Save</button>
-	    </form>
-  	</div>
     <ul class="main__note-list note-list" *ngIf="notes.length > 0">
       <li class="note-list__item" *ngFor="let note of notes">
         <div class="item" id="item--{{note.id}}">
-          <label class="item__label">{{note.title}}</label>
-          <div class="item__content">{{note.content}}</div>
-          <button class="item__destroy" (click)="removeNote(note)"></button>
+          <h3 class="item__title">{{note.title}}</h3>
+          <div class="item__content" [innerHTML]=parseMarkdown(note.content)></div>
+          <div class="item__footer">
+            <button class="item__footer-edit"></button>
+            <button class="item__footer-destroy"></button>
+          </div>
         </div>
       </li>
     </ul>
+    <div class="main__editor">
+      <div class="main__editor-form">
+        <h2 class="main__editor-form-title">Add a new note</h2>   
+        <form class="form" [formGroup]="noteForm" (ngSubmit)="onSubmit(noteForm.value)">
+          <div class="form__group">
+            <input type="text" class="form__control" id="title" required name="title" placeholder="Your note title" [formControl]="noteForm.controls['title']">        
+          </div>
+          <div class="form__group">
+            <textarea class="form__control" id="content" required name="content" placeholder="Your note content: feel free to use markdown if you like!" [formControl]="noteForm.controls['content']"></textarea>
+          </div>
+          <button type="submit" class="form__submit" [disabled]="!noteForm.valid">Save</button>
+        </form>
+      </div>
+      <div class="main__editor-preview">
+        <h2 class="main__editor-preview-title">Preview</h2>
+        <div class="preview">
+          <h3 class="preview__title">{{previewTitle}}</h3>
+          <div class="preview__content" [innerHTML]="previewContent"></div>
+        </div>
+      </div>
+    </div>
   </section>
   <footer class="noteapp__footer footer">
-    <span *ngIf="notes.length > 0" class="footer__note-count"><strong>{{notes.length}}</strong> {{notes.length == 1 ? 'item' : 'items'}}</span>
+    <span *ngIf="notes.length > 0" class="footer__note-count"><strong>{{notes.length}}</strong> {{notes.length == 1 ? 'note' : 'notes'}}</span>
+     <span *ngIf="!notes.length > 0">No notes yet</span>
   </footer>
+  <div class="noteapp__overlay overlay"></div>
 </section>
