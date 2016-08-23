@@ -16,8 +16,12 @@ export class NoteAppComponent implements OnInit {
 
 	newNote: Note = new Note();
 	noteForm: FormGroup;
+	editNoteForm: FormGroup;
 	previewTitle:string;
 	previewContent:string;
+	showOverlay = false;
+	showDeleteModal = false;
+	noteToDelete = {};
 	md = new MarkdownIt();
 
 	constructor(private noteService: NoteService, private fb: FormBuilder) {
@@ -39,6 +43,8 @@ export class NoteAppComponent implements OnInit {
 
 	removeNote(note) {
 		this.noteService.deleteNoteById(note.id);
+		this.closeDeleteModal();
+		this.noteToDelete = {};
 	}
 
 	get notes() {
@@ -54,6 +60,23 @@ export class NoteAppComponent implements OnInit {
 		});
 	}
 
+	editNote(note) {
+		this.editNoteForm = this.fb.group({'title': note.title, 'content': note.content});
+		this.showOverlay = true;
+		note.editing = true;
+	}
+
+	closeDeleteModal() {
+		this.showOverlay = false;
+		this.showDeleteModal = false;
+	}
+
+	openDeleteModal(note) {
+		this.showOverlay = true;
+		this.showDeleteModal = true;
+		this.noteToDelete = note;
+	}
+
 	parseMarkdown(content) {
 		return this.md.render(content);
 	}
@@ -62,14 +85,14 @@ export class NoteAppComponent implements OnInit {
 		this.subscribeChanges();
 	}
 
-	ngOnChange() {
-
-	}
-
 	onSubmit(value: any): void {
-		console.log('you submitted value:', value);
 		this.addNote(value);
 		this.createForm();
+	}
+
+	onEditSubmit(note: any, value: any): void {
+		this.noteService.updateNoteById(note.id, value);
+		note.editing = false;
 	}
 
 }
