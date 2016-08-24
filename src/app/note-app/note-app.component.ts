@@ -22,6 +22,7 @@ export class NoteAppComponent implements OnInit {
 	showOverlay = false;
 	showDeleteModal = false;
 	noteToDelete = {};
+	noteToEdit = {editing:false};
 	md = new MarkdownIt();
 
 	constructor(private noteService: NoteService, private fb: FormBuilder) {
@@ -64,6 +65,12 @@ export class NoteAppComponent implements OnInit {
 		this.editNoteForm = this.fb.group({'title': note.title, 'content': note.content});
 		this.showOverlay = true;
 		note.editing = true;
+		this.noteToEdit = note;
+	}
+
+	abortOverlay() {
+		this.closeDeleteModal();
+		this.noteToEdit.editing = false;
 	}
 
 	closeDeleteModal() {
@@ -93,6 +100,7 @@ export class NoteAppComponent implements OnInit {
 	onEditSubmit(note: any, value: any): void {
 		this.noteService.updateNoteById(note.id, value);
 		note.editing = false;
+		this.showOverlay = false;
 	}
 
 }
