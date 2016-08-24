@@ -1,0 +1,37 @@
+.main {
+  padding: 0;
+  .main__editor {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2em;
+    padding-bottom: 4em;
+    align-items: flex-start;
+    background-color: darken($canvas,8%);
+  }
+  .main__editor-form, .main__editor-preview {
+    position: relative;
+    flex: 0 1 100%;
+    min-width: 0;
+    max-width: 32em;
+    @media screen and (min-width: 468px) {
+       flex: 0 1 48%;
+    }
+  }
+  .main__editor-form {
+    @media screen and (min-width: 468px) {
+      margin-right: 4%;
+    }
+    margin-bottom: 2em;
+  }
+  .main__editor-form-title, .main__editor-preview-title {
+    text-align:left;
+    font-size: 1.4em;
+    margin-bottom: 0.6em;
+  }
+  .main__note-list {
+    position: relative;
+    width: 100%;
+  }
+}

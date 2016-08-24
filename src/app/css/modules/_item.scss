@@ -1,0 +1,59 @@
+.item {
+  @extend .preview;
+  display: block;
+  transition: .2s ease-in-out;
+  overflow:hidden;
+  position: relative;
+  .item__title {
+    @extend .preview__title;
+  }
+  .item__content {
+    @extend .preview__content;
+  }
+  .item__footer {
+    position: relative;
+    transition: .2s ease-in-out;
+    opacity: 0;
+    transform: translateY(100%);
+    text-align: right;
+  }
+  .item__footer-destroy, .item__footer-edit {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    display: inline-block;
+    margin-left: 0.5em;
+    width: 2em;
+    height: 2em;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    transition: .2s ease-in-out;
+    opacity: 0.5;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .item__footer-destroy {
+    background-image: url('../img/delete.svg');
+  }
+  .item__footer-edit {
+    background-image: url('../img/edit.svg');
+  }
+  &:hover {
+    box-shadow: 0 2px 15px rgba(0,0,0,0.30);
+    .item__footer {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+.item--editmode {
+  @extend .item;
+  transition:.2s ease-in-out;
+  z-index: 101;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.30);
+}

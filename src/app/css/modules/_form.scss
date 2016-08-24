@@ -1,0 +1,74 @@
+.form {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  background-color: $white;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
+  overflow: hidden;
+  border-radius: 3px;
+  padding: 1em;
+  text-align:left;
+  .form__control, .form__submit {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    font-size: 1em;
+  }
+  .form__control {
+    width: 100%;
+    display:block;
+    padding: 0.8em 0.5em;
+    resize: none;
+    font-size: 1.1em;
+    font-family: $form__font;
+    background-color: transparent;
+  }
+  .form__submit {
+    text-transform: uppercase;
+    color: $white;
+    background-color: $primary__green;
+    cursor: pointer;
+    padding: 0.5em 0.8em;
+    border-radius: 3px;
+    font-weight: 700;
+    transition: .2s ease-in-out;
+    float: right;
+    margin-top: 1em;
+    &:hover {
+      background-color: darken($primary__green,5%);
+    }
+    &[disabled] {
+      color: lighten($content, 20%);
+      cursor: auto;
+      background-color: darken($canvas,3%);
+      &:hover {
+        background-color: darken($canvas,3%);
+      }
+    }
+  }
+  input {
+    font-weight: 600;
+    border-bottom: 2px solid darken($canvas, 1%) !important;
+  }
+  textarea {
+    width: 100%;
+    height: 10em;
+  }
+  &.item__form {
+    background-color: $secondary__yellow;
+    box-shadow: none;
+    padding: 0;
+    input {
+      border-bottom: 2px solid rgba($black, 0.05) !important;
+    }
+    textarea {
+      width: 100%;
+      height: auto;
+      min-height: 8em;
+    }
+  }
+}

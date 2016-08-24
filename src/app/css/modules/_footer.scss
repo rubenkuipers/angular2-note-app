@@ -1,0 +1,15 @@
+.footer {
+  padding: 2em;
+  background-color: $white;
+  clear: both;
+  overflow: hidden;
+  span {
+    float: right;
+  }
+  .footer__copy {
+    float: left;
+    a {
+      color: $primary__green;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+.deletemodal {
+  background-color: $white;
+  padding: 2em;
+  border-radius: 3px;
+  box-shadow: 0 2px 2em rgba(0,0,0,0.30);
+  display: none;
+  &.active {
+    display: block;
+  }
+  .deletemodal__title {
+    margin-bottom: 0.5em;
+  }
+  .deletemodal__button-remove, .deletemodal__button-close {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    border: 0;
+    font-size: 1em;
+    padding: 0.5em 0.8em;
+    border-radius: 3px;
+    margin-left: 0.5em;
+    margin-top: 1.5em;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: .2s ease-in-out;
+    color: $white;
+    cursor: pointer;
+  }
+  .deletemodal__button-remove {
+    background-color: #ff5252;
+    &:hover {
+      background-color: darken(#ff5252, 5%);
+    }
+  }
+}

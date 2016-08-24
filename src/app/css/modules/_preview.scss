@@ -1,0 +1,36 @@
+.preview {
+  @extend .form;
+  background-color: $secondary__yellow;
+  width:100%;
+  max-width: 100%;
+  .preview__title {
+    display:block;
+    width:100%;
+    max-width:100%;
+    padding: 0.5em;
+    min-height: 2.5em;
+    border-bottom: 2px solid rgba($black, 0.05);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .preview__content {
+    padding: 0.5em;
+    min-height: 2.5em;
+    max-width:100%;
+    p, ul, ol, blockquote, h1, h2, h3, h4, h5, h6 {
+      margin-bottom: 0.5em;
+      // white-space: nowrap;
+    overflow: hidden;
+    // text-overflow: ellipsis;
+    }
+    ul,ol {
+      padding-left: 2em;
+    }
+    blockquote {
+      margin-left: 1em;
+      padding-left: 1em;
+      border-left: 2px solid rgba($black, 0.2);
+    }
+  }
+}

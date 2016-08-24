@@ -1,0 +1,25 @@
+.note-list {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  position: relative;
+  padding: 2em 1em;
+  list-style-type: none;
+  transition: .2s ease-in-out;
+  .note-list__item {
+    padding: 1em;
+    width: 100%;
+    min-width: 0;
+    position: relative;
+    transition: .2s ease-in-out;
+    @media screen and (min-width: 468px) {
+      width: 50%;
+    }
+    @media screen and (min-width: 768px) {
+      width: 33.33%;
+    }
+    @media screen and (min-width: 1440px) {
+      width: 25%;
+    }  
+  }
+}

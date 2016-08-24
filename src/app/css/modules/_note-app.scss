@@ -1,0 +1,29 @@
+.noteapp {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+  .noteapp__header {
+    position: fixed;
+    left: 0;
+    top:0;
+    z-index: 99;
+  }
+  .noteapp__main {
+    position: relative;
+  }
+  .noteapp__footer {
+    position: relative;
+  }
+  .noteapp__overlay {
+    position: fixed;
+    left:0;
+    top: 0;
+  }
+  .noteapp__deletemodal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 101;
+  }
+}
