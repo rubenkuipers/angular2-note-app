@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup } from '@angular/forms';
+import {TimerWrapper} from '@angular/core/src/facade/async';
 import * as MarkdownIt from 'markdown-it';
 import {Note} from '../note';
 import {NoteService} from '../note.service';
@@ -15,6 +16,7 @@ import {NoteService} from '../note.service';
 export class NoteAppComponent implements OnInit {
 
 	newNote: Note = new Note();
+	notes = [];
 	noteForm: FormGroup;
 	editNoteForm: FormGroup;
 	previewTitle:string;
@@ -25,7 +27,7 @@ export class NoteAppComponent implements OnInit {
 	noteToEdit = {editing:false};
 	md = new MarkdownIt();
 
-	constructor(private noteService: NoteService, private fb: FormBuilder) {
+	constructor(private noteService: NoteService, private fb: FormBuilder, private elementRef: ElementRef) {
 		this.createForm();
 	}
 
@@ -36,20 +38,33 @@ export class NoteAppComponent implements OnInit {
 		this.subscribeChanges();
 	}
 
+	getNotes() {
+		this.notes = this.noteService.getAllNotes();
+	}
+
 	addNote(note) {
 		this.newNote = note;
 		this.noteService.addNote(this.newNote);
 		this.newNote = new Note();
 	}
 
+	editNote(note) {
+		this.editNoteForm = this.fb.group({'title': note.title, 'content': note.content});
+		this.showOverlay = true;
+		note.editing = true;
+		this.noteToEdit = note;
+		// Set focus to current note form textarea
+		TimerWrapper.setTimeout(() => {  
+		  this.elementRef.nativeElement.querySelector('.item__form textarea').focus();
+		}, 0);
+		
+	}
+
 	removeNote(note) {
 		this.noteService.deleteNoteById(note.id);
 		this.closeDeleteModal();
 		this.noteToDelete = {};
-	}
-
-	get notes() {
-		return this.noteService.getAllNotes();
+		this.getNotes();
 	}
 
 	subscribeChanges() {
@@ -61,16 +76,10 @@ export class NoteAppComponent implements OnInit {
 		});
 	}
 
-	editNote(note) {
-		this.editNoteForm = this.fb.group({'title': note.title, 'content': note.content});
+	openDeleteModal(note) {
 		this.showOverlay = true;
-		note.editing = true;
-		this.noteToEdit = note;
-	}
-
-	abortOverlay() {
-		this.closeDeleteModal();
-		this.noteToEdit.editing = false;
+		this.showDeleteModal = true;
+		this.noteToDelete = note;
 	}
 
 	closeDeleteModal() {
@@ -78,17 +87,12 @@ export class NoteAppComponent implements OnInit {
 		this.showDeleteModal = false;
 	}
 
-	openDeleteModal(note) {
-		this.showOverlay = true;
-		this.showDeleteModal = true;
-		this.noteToDelete = note;
-	}
-
 	parseMarkdown(content) {
 		return this.md.render(content);
 	}
 
 	ngOnInit() {
+		this.getNotes();
 		this.subscribeChanges();
 	}
 
@@ -98,9 +102,15 @@ export class NoteAppComponent implements OnInit {
 	}
 
 	onEditSubmit(note: any, value: any): void {
-		this.noteService.updateNoteById(note.id, value);
 		note.editing = false;
+		delete note.editing;
+		this.noteService.updateNoteById(note.id, value);
 		this.showOverlay = false;
+	}
+
+	abortOverlay() {
+		this.closeDeleteModal();
+		this.noteToEdit.editing = false;
 	}
 
 }
