@@ -1,0 +1,56 @@
+// FONTS
+$body__font: "Lato", sans-serif;
+$form__font: 'Inconsolata', monospace;
+$heading__font: $body__font;
+
+// COLORS
+$black: #1D1D26;
+$white: #FDFDFD;
+
+$canvas: #F9F9FA;
+$content: #666666;
+
+$primary__green: #5fcf80;
+$primary__blue: #0000b2;
+$secondary__yellow: lighten(#FFFFA5,7%);
+
+* {
+  box-sizing: border-box;
+  outline: none;
+  border:0;
+  margin:0;
+  padding:0;
+  &:focus {
+    outline:0;
+  }
+}
+html {
+  font-size: 100%; 
+  @media screen and (min-width: 960px) {
+    font-size: 115%;
+  }
+  @media screen and(min-width: 1680px) {
+    font-size: 130%;
+  }
+}
+body {
+  position: relative;
+  line-height: 1.40;
+  letter-spacing: 0.03em;
+  font-family: $body__font;
+  background-color: $canvas;
+  background-color: darken($canvas, 4%);
+  color:$content;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility !important;
+}
+a {
+  text-decoration:none;
+  color: $content;
+  font-weight: 400;
+  &:hover {
+    text-decoration: none;
+  }
+}
