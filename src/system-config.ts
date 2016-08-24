@@ -9,12 +9,14 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
-  'markdown-it': 'vendor/markdown-it/dist'
+  'markdown-it': 'vendor/markdown-it/dist',
+  'angular-2-local-storage': 'vendor/angular-2-local-storage/src'
 };
 
 /** User packages configuration. */
 const packages: any = {
-  'markdown-it': { defaultExtension: 'js', main: 'markdown-it.min.js' }
+  'markdown-it': { defaultExtension: 'js', main: 'markdown-it.min.js' },
+  'angular-2-local-storage': { main: 'angular-2-local-storage.js', defaultExtension: 'js' }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
