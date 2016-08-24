@@ -1,5 +1,12 @@
 # Angular2NoteApp
 
+A simple Note app in Angular 2 with support for Markdown. Notes are saved in localStorage.
+
+## Libraries
+
+- [markdown-it](https://github.com/markdown-it/markdown-it)
+- [angular-2-local-storage](https://github.com/phenomnomnominal/angular-2-local-storage)
+
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.10.
 
 ## Development server
