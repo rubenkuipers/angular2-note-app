@@ -21,11 +21,12 @@ describe('Note Service', () => {
     }));
 
     it('should return all notes', inject([NoteService], (service: NoteService) => {
+      // let notes = service.getAllNotes();
       let note1 = new Note({title: 'Hello 1', content: 'New note 1'});
       let note2 = new Note({title: 'Hello 2', content: 'New note 2'});
       service.addNote(note1);
       service.addNote(note2);
-      expect(service.getAllNotes()).toEqual([note1, note2]);
+      expect(service.getAllNotes()).toEqual([{title: 'Hello 1', content: 'New note 1', id: 1},{title: 'Hello 2', content: 'New note 2', id: 2}]);
     }));
 
   });
@@ -50,9 +51,9 @@ describe('Note Service', () => {
       let note2 = new Note({title: 'Hello 2', content: 'New note 2'});
       service.addNote(note1);
       service.addNote(note2);
-      expect(service.getAllNotes()).toEqual([note1, note2]);
+      expect(service.getAllNotes()).toEqual([{title: 'Hello 1', content: 'New note 1', id: 1}, {title: 'Hello 2', content: 'New note 2', id: 2}]);
       service.deleteNoteById(1);
-      expect(service.getAllNotes()).toEqual([note2]);
+      expect(service.getAllNotes()).toEqual([{title: 'Hello 2', content: 'New note 2', id: 2}]);
       service.deleteNoteById(2);
       expect(service.getAllNotes()).toEqual([]);
     }));
@@ -62,9 +63,9 @@ describe('Note Service', () => {
       let note2 = new Note({title: 'Hello 2', content: 'New note 2'});
       service.addNote(note1);
       service.addNote(note2);
-      expect(service.getAllNotes()).toEqual([note1, note2]);
+      expect(service.getAllNotes()).toEqual([{title: 'Hello 1', content: 'New note 1', id: 1},{title: 'Hello 2', content: 'New note 2', id: 2}]);
       service.deleteNoteById(3);
-      expect(service.getAllNotes()).toEqual([note1, note2]);
+      expect(service.getAllNotes()).toEqual([{title: 'Hello 1', content: 'New note 1', id: 1},{title: 'Hello 2', content: 'New note 2', id: 2}]);
     }));
 
   });

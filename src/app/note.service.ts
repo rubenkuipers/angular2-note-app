@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import { LocalStorageService } from 'angular-2-local-storage';
 import {Note} from './note';
 
 @Injectable()
@@ -10,11 +9,11 @@ export class NoteService {
   lastId: number = 0;
 
   // Placeholder for notes
-  notes: Note[] | any;
+  notes: Note[] = [];
 
-  constructor(private localStorageService: LocalStorageService) {
-    if(!this.localStorageService.get('notes')) {
-      this.localStorageService.set('notes',this.notes);
+  constructor() {
+    if(!localStorage.getItem('notes')) {
+      localStorage.setItem('notes',JSON.stringify([]));
     }
   }
 
@@ -27,7 +26,7 @@ export class NoteService {
       note.id = ++this.lastId;
     }
     this.notes.push(note);
-    this.localStorageService.set('notes', this.notes);
+    localStorage.setItem('notes', JSON.stringify(this.notes));
     return this;
   }
 
@@ -35,7 +34,7 @@ export class NoteService {
   deleteNoteById(id: number): NoteService {
     this.notes = this.notes
       .filter(note => note.id !== id);
-    this.localStorageService.set('notes', this.notes);
+    localStorage.setItem('notes', JSON.stringify(this.notes));
     return this;
   }
 
@@ -46,14 +45,13 @@ export class NoteService {
       return null;
     }
     Object.assign(note, values);
-    this.localStorageService.set('notes', this.notes);
+    localStorage.setItem('notes', JSON.stringify(this.notes));
     return note;
   }
 
   // Simulate GET /notes
   getAllNotes(): Note[] {
-    let notes = this.localStorageService.get('notes');
-    console.log('get notes fired');
+    let notes = JSON.parse(localStorage.getItem('notes'));
     if(notes) {
       this.notes = notes;
     } else {
