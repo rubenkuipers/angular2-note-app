@@ -21,7 +21,6 @@
     "@angular/platform-browser": "2.0.0-rc.4",
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
     "@angular/router": "3.0.0-beta.2",
-    "angular-2-local-storage": "0.0.18",
     "es6-shim": "0.35.1",
     "markdown-it": "^7.0.1",
     "reflect-metadata": "0.1.3",
