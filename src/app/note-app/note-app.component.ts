@@ -1,17 +1,15 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup } from '@angular/forms';
-import {TimerWrapper} from '@angular/core/src/facade/async';
+import { FormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import * as MarkdownIt from 'markdown-it';
-import {Note} from '../note';
-import {NoteService} from '../note.service';
+import { Note } from '../note';
+import { NoteService } from '../note.service';
 
 @Component({
-	moduleId: module.id,
 	selector: 'note-app',
 	templateUrl: 'note-app.component.html',
-	styleUrls: ['note-app.component.css'],
-	providers: [NoteService],
-	directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
+	styleUrls: ['note-app.component.scss'],
+	providers: [ NoteService ],
+	// directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
 })
 export class NoteAppComponent implements OnInit {
 
@@ -54,7 +52,7 @@ export class NoteAppComponent implements OnInit {
 		note.editing = true;
 		this.noteToEdit = note;
 		// Set focus to current note form textarea
-		TimerWrapper.setTimeout(() => {  
+		setTimeout(() => {  
 		  this.elementRef.nativeElement.querySelector('.item__form textarea').focus();
 		}, 0);
 		
