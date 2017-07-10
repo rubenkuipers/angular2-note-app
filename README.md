@@ -1,6 +1,6 @@
 # Angular2NoteApp
 
-A simple Note app in Angular 2 with support for Markdown. Notes are saved in localStorage. Checkout the demo [HERE](http://zerocopternotes.rkmediadesign.nl/).
+A simple Note app in Angular 2 with support for Markdown. Notes are saved in localStorage. Checkout the demo on [notes.rkmediadesign.nl](http://notes.rkmediadesign.nl/).
 
 ## Markdown plugin and CLI
 
